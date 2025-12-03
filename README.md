@@ -59,19 +59,52 @@ This Flask-based web application serves as a comprehensive finance tracker, enab
    pip install -r requirements.txt
    ```
 
-## Usage
+## How to Run
 
-1. Initialize the SQLite database:
+### Prerequisites
+- Python 3.8 or higher
+- pip (Python package installer)
 
+### Quick Start
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/0xramm/Finance-Tracker.git
+   cd Finance-Tracker
+   ```
+
+2. **Install dependencies:**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. **Run the application:**
+   
+   **Option A: Refactored Version (Recommended)**
+   ```bash
+   python run_refactored.py
+   ```
+   
+   **Option B: Original Version**
    ```bash
    python app.py
    ```
 
-2. Open the application in your web browser:
+4. **Access the application:**
+   Open your web browser and go to: `http://localhost:5000`
 
-   ```
-   http://localhost:5000/
-   ```
+### First Time Setup
+1. Register a new account or use the existing demo data
+2. Start adding your income and expense transactions
+3. Create budgets to track your spending
+4. View analytics and statistics on your financial habits
+
+### Features Available
+- **User Authentication**: Secure login and registration
+- **Transaction Management**: Add income and expense transactions
+- **Budget Tracking**: Set and monitor spending limits
+- **Analytics Dashboard**: Visual insights and spending patterns
+- **Responsive Design**: Works on desktop and mobile devices
 
 ## Contributing
 
