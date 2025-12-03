@@ -144,7 +144,10 @@ class TransactionRepository(Repository[Transaction]):
     def _row_to_transaction(self, row) -> Transaction:
         """Convert database row to Transaction object."""
         # Handle cases where transaction_type might be None for old records
-        transaction_type = row.get('transaction_type') or 'expense'
+        try:
+            transaction_type = row['transaction_type'] if row['transaction_type'] else 'expense'
+        except (KeyError, IndexError):
+            transaction_type = 'expense'
         
         return Transaction(
             id=row['id'],
