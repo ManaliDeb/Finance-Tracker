@@ -66,19 +66,27 @@ def index():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
+        username = request.form.get('username', '').strip()
+        password = request.form.get('password', '')
+
         conn = sqlite3.connect(DATABASE)
         c = conn.cursor()
-        c.execute("SELECT id, username FROM users WHERE username = ? AND password = ?", (username, password))
-        user = c.fetchone()
-        conn.close()
-        if user:
-            session['user_id'] = user[0]  # Store user_id in session
-            session['username'] = user[1]  # Store username in session
+        try:
+            # fetch hashed password for the given user
+            c.execute("SELECT id, username, password FROM users WHERE username = ?", (username,))
+            user = c.fetchone()
+        finally:
+            conn.close()
+
+        if user and check_password_hash(user[2], password):
+            # reset session to avoid fixation, then store identity
+            session.clear()
+            session['user_id'] = user[0]
+            session['username'] = user[1]
             return redirect(url_for('index'))
         else:
             flash('Invalid username or password. Please try again.', 'error')
+
     return render_template('login.html')
 
 
@@ -101,8 +109,11 @@ def register():
         if existing_user:
             flash('Username already exists. Please choose a different one.', 'error')
         else:
-            c.execute("INSERT INTO users (username, email, phone, password) VALUES (?, ?, ?, ?)",
-                      (username, email, phone, password))
+            hashed = generate_password_hash(password)  # pbkdf2:sha256 by default
+            c.execute(
+                "INSERT INTO users (username, email, phone, password) VALUES (?, ?, ?, ?)",
+                (username, email, phone, hashed)
+            )
             conn.commit()
             conn.close()
             flash('Registration successful! Please log in.', 'success')
