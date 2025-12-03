@@ -139,24 +139,45 @@ def transactions():
 
 @app.route('/add_transaction', methods=['POST'])
 def add_transaction():
-    if 'username' in session:
-        user_id = session['user_id']  # Assuming you store user_id in session
-        date = request.form['date']
-        category = request.form['category']
-        amount = request.form['amount']
-        payment_method = request.form['payment_method']
-        description = request.form['notes']
-
-        conn = sqlite3.connect(DATABASE)
-        c = conn.cursor()
-        c.execute("INSERT INTO transactions (user_id, date, category, amount, payment_method, description) VALUES (?, ?, ?, ?, ?, ?)",
-                  (user_id, date, category, amount, payment_method, description))
-        conn.commit()
-        conn.close()
-
-        return redirect(url_for('transactions'))
-    else:
+    if 'user_id' not in session:
         return redirect(url_for('login'))
+
+    user_id = session['user_id']
+    category = request.form.get('category', '').strip()
+    payment_method = request.form.get('payment_method', '').strip()
+    description = request.form.get('notes', '').strip()
+
+    try:
+        amount = float(request.form['amount'])
+    except (KeyError, TypeError, ValueError):
+        flash('Amount must be a valid number.', 'error')
+        return redirect(url_for('transactions'))
+
+    date = request.form.get('date', '').strip()
+
+    if not category or amount is None:
+        flash('Category and amount required', 'error')
+        return redirect(url_for('transactions'))
+
+    try:
+        datetime.strptime(date, '%Y-%m-%d')
+    except ValueError:
+        flash('Date must be in YYYY-MM-DD format.', 'error')
+        return redirect(url_for('transactions'))
+
+    conn = sqlite3.connect(DATABASE)
+    c = conn.cursor()
+    c.execute(
+        """INSERT INTO transactions
+           (user_id, date, category, amount, payment_method, description)
+           VALUES (?, ?, ?, ?, ?, ?)""",
+        (user_id, date, category, amount, payment_method, description),
+    )
+    conn.commit()
+    conn.close()
+
+    flash('Transaction added.', 'success')
+    return redirect(url_for('transactions'))
     
 @app.route('/delete_transaction/<int:transaction_id>', methods=['POST'])
 def delete_transaction(transaction_id):
