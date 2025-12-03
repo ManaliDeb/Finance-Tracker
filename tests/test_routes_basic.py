@@ -1,11 +1,9 @@
-# few basic route tests
-
+# tests/test_routes_basic.py
 
 def test_home_route_exists(client):
     """
     The home page ('/') should exist.
-    In many finance apps, if the user is not logged in, this might redirect.
-    We accept 200 (OK) or 302 (Redirect).
+    It might redirect (302) if the user is not logged in, or return 200.
     """
     response = client.get("/")
     assert response.status_code in (200, 302)
@@ -32,7 +30,7 @@ def test_register_page_loads(client):
 def test_transactions_route_exists(client):
     """
     The /transactions page should exist.
-    If it is protected, it may redirect (302) when not logged in.
+    It may be protected and redirect (302), or return 200 if public.
     """
     response = client.get("/transactions")
     assert response.status_code in (200, 302)
@@ -41,7 +39,7 @@ def test_transactions_route_exists(client):
 def test_statistics_route_exists(client):
     """
     The /statistics page should exist.
-    It may be protected (302) or public (200).
+    It may be protected and redirect (302), or return 200 if public.
     """
     response = client.get("/statistics")
     assert response.status_code in (200, 302)

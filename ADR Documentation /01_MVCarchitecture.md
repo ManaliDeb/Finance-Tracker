@@ -1,25 +1,26 @@
 # Finance Tracker Flask App
 
-This project was forked from an open-source Finance Tracker that originally had a more monolithic Flask structure. For our course project, we decided to adopt and refine a layered, MVC-style architecture to improve clarity, testability, and maintainability.
+This project is a fork of the open-source Finance Tracker (0xramm/Finance-Tracker). The original code provides a working Flask app for tracking expenses and income. For our course project, we decided to keep this base and focus on understanding, documenting, and lightly extending its architecture and quality.
+
+For a full structural overview, see `ARCHITECTURE.md`.
 
 ## Decisions
-- Use a layered architecture with:
-  - A **presentation layer** for routes and templates
-  - A **service layer** for business logic
-  - A **repository layer** for data access
-  - A **domain/model layer** for core entities
-- Keep the original schema compatible while improving organization.
+- Keep the original Flask-based structure and database schema.
+- Use the refactored architecture description in `ARCHITECTURE.md` to explain the system in layered, MVC-style terms (presentation, domain, data access).
+- Add our own documentation and tests on top of the fork.
 
 ## Rationale
-- Aligns with MVC and layered architecture concepts covered in class.
-- Makes the codebase easier to reason about and extend.
-- Clearly separates concerns between UI, logic, and persistence.
+- Starting from a working open-source app lets us concentrate on architecture, design, and testing rather than just rebuilding CRUD.
+- This fits the assignment’s goal of adapting and improving an existing project.
+- Documenting the architecture helps us and the grader understand how the app is organized.
 
 ## Consequences
-- **Pros**: 
-   -  Matches industry-style architectures.
-    -  Encourages unit testing of services and repositories.
-    - Makes responsibilities of files and folders more obvious.
-- **Cons**: 
-   - Requires more structure and discipline than a single-file Flask app.
-   - Refactoring effort needed to keep routes, services, and repositories aligned.
+
+** Pros **
+- Faster to get to design and testing work.
+- Clear story for the final report: we evaluated and extended an existing app.
+- We can compare behavior with the original project if needed.
+
+** Cons**
+- We did not design every part of the code from scratch.
+- Some legacy design decisions remain from the original project.
