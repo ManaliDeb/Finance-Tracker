@@ -49,13 +49,16 @@
             <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
                 <ul class="navbar-nav mb-2 mb-lg-0">
                     <li class="nav-item me-lg-3">
-                        <a class="nav-link" href="{{ url_for('index') }}">Home</a>
+                        <a class="nav-link" href="{{ url_for('main.index') }}">Home</a>
                     </li>
                     <li class="nav-item me-lg-3">
-                        <a class="nav-link" href="{{ url_for('transactions') }}">Transactions</a>
+                        <a class="nav-link" href="{{ url_for('transactions.transactions') }}">Transactions</a>
                     </li>
                     <li class="nav-item me-lg-3">
-                        <a class="nav-link" href="{{ url_for('statistics') }}">Statistics</a>
+                        <a class="nav-link" href="{{ url_for('budgets.budgets') }}">Budgets</a>
+                    </li>
+                    <li class="nav-item me-lg-3">
+                        <a class="nav-link" href="{{ url_for('main.statistics') }}">Statistics</a>
                     </li>
                 </ul>
             </div>
@@ -65,7 +68,7 @@
                         {{username}}
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="{{ url_for('logout') }}">Logout</a></li>
+                        <li><a class="dropdown-item" href="{{ url_for('auth.logout') }}">Logout</a></li>
                     </ul>
                 </div>
             </div>

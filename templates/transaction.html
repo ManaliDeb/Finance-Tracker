@@ -71,7 +71,7 @@ Transactions - Finance Tracker
         <td>{{ transaction[5] }}</td>  {# Notes or Description #}
         <td>
             <!-- Button or link to trigger the delete action -->
-            <form action="{{ url_for('delete_transaction', transaction_id=transaction[0]) }}" method="post">
+            <form action="{{ url_for('transactions.delete_transaction', transaction_id=transaction[0]) }}" method="post">
                 <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
             </form>
         </td>
@@ -86,7 +86,7 @@ Transactions - Finance Tracker
     <div class="popup-content p-4">
         <span class="close" onclick="closePopup()">&times;</span>
         <!-- Form for adding transaction -->
-        <form action="{{ url_for('add_transaction') }}" method="post">
+        <form action="{{ url_for('transactions.add_transaction') }}" method="post">
             <!-- Add input fields for transaction details -->
             <div class="mb-3">
                 <label for="date" class="form-label">Date:</label>
