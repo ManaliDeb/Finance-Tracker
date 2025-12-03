@@ -1,0 +1,32 @@
+# ADR 03 – Testing Strategy with pytest
+
+## Overview
+Because this project is forked from an open-source Finance Tracker, our main contribution focuses on improving reliability and maintainability through automated testing. The original repository did not include a formal test suite.
+
+## Decision
+We decided to add a lightweight but meaningful testing strategy based on:
+
+- **pytest** as the test runner.
+- A **tests/** directory to organize route and behavior tests.
+- A shared **test client fixture** to simulate HTTP requests to the Flask app.
+- Tests that focus on:
+  - Route availability (e.g., `/`, `/login`, `/register`, `/transactions`, `/statistics`).
+  - Correct status codes (200, 302, 404).
+  - Redirect behavior for protected routes (e.g., redirecting unauthenticated users to `/login`).
+
+## Rationale
+- Automated tests give us confidence that core pages work as expected after changes.
+- Route and redirect tests are fast and easy to run on any machine.
+- A clear testing structure demonstrates good software engineering practice on top of the inherited codebase.
+- Using pytest integrates well with Python and Flask and matches course expectations.
+
+## Consequences
+
+### Pros
+- Increases confidence when refactoring or extending the app.
+- Provides quick feedback if a route is accidentally removed or broken.
+- Makes the project look more professional and complete for the final report.
+
+### Cons
+- Current tests focus on high-level behavior and do not cover every edge case or database scenario.
+- More detailed tests (e.g., full login + transaction flows) would require additional setup and test data.
