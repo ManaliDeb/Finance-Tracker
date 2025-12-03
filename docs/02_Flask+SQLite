@@ -1,2 +1,32 @@
+# ADR 0002 – Flask + SQLite Technology Stack
+
 ## Overview
 We built the Finance Tracker on top of the **Flask web framework** with **SQLite** as the database, to keep the stack lightweight and easy to run for this class project.
+
+## Decision
+We intentionally adopted and refined the existing technology stack:
+
+- **Flask** – Web framework used for routing, sessions, templating, and request handling.
+
+- **SQLite** – Lightweight, file-based database for storing users and transactions.
+
+- **Jinja2** – Template engine used to generate dynamic HTML views.
+
+## Rationale
+- Flask is simple, flexible, and ideal for a small project.
+- SQLite requires no external server, making it easy to run the project.
+- The inherited stack reduced setup overhead but still allowed us to apply architectural patterns, testing, and documentation practices.
+- Flask integrates naturally with Jinja2, which supports MVC principles through template-based views.
+
+
+## Consequences
+
+### Pros
+- Easy environment setup (`pip install -r requirements.txt`).
+- No separate database needed.
+- Lightweight and fast enough for development/demo.
+- Maintains compatibility with the open-source fork.
+
+### Cons
+- SQLite is not designed for high-concurrency production workloads.
+- Flask requires manual implementation of some features 
