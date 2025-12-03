@@ -1,29 +1,25 @@
 # Finance Tracker Flask App
 
-To keep this Finance Tracker organized and easier to maintain, we chose a MVC-style structure (model-view-controller view). This project was originally forked from an open-source Finance Tracker. The original structure loosely followed this style. Our team adopted this structure intentionally and refined it by reorganizing routes, views, and database logic to create a clearer separation of concerns consistent with MVC principles.
+This project was forked from an open-source Finance Tracker that originally had a more monolithic Flask structure. For our course project, we decided to adopt and refine a layered, MVC-style architecture to improve clarity, testability, and maintainability.
 
 ## Decisions
-
-- **model**:
-    - SQLite database to store users and transactions
-    - adding database functions in 'db.py'
-
-- **view**: 
-    - HTML templates with Jinja2
-        (Jinja2 is a popular, fast, and expressive templating engine for Python. It is widely used in web development frameworks like Flask)
-    - pages of templates include: Login, Regristration, Dashboard, Transactions, Statistics
-- **Controller**: 
-   - Flask route handlers in "app.py"
-   - Logic for authentication, data retriveral, form processing
+- Use a layered architecture with:
+  - A **presentation layer** for routes and templates
+  - A **service layer** for business logic
+  - A **repository layer** for data access
+  - A **domain/model layer** for core entities
+- Keep the original schema compatible while improving organization.
 
 ## Rationale
-- Clear seperation of the responsibilties
-- Helps to make debugging and testing easier
+- Aligns with MVC and layered architecture concepts covered in class.
+- Makes the codebase easier to reason about and extend.
+- Clearly separates concerns between UI, logic, and persistence.
 
 ## Consequences
 - **Pros**: 
-   - Improved clarity and maintainabilty
-   - Easier collaboration 
-   - Consistent file organization
+   -  Matches industry-style architectures.
+    -  Encourages unit testing of services and repositories.
+    - Makes responsibilities of files and folders more obvious.
 - **Cons**: 
-   - Requires discipline to maintain the MVC structure
+   - Requires more structure and discipline than a single-file Flask app.
+   - Refactoring effort needed to keep routes, services, and repositories aligned.
