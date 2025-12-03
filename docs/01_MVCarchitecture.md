@@ -1,6 +1,6 @@
 # Finance Tracker Flask App
 
-To keep this Finance Tracker organized and easier to maintain, we shoe a MVC-style structure (model-view-controller view)
+To keep this Finance Tracker organized and easier to maintain, we chose a MVC-style structure (model-view-controller view). This project was originally forked from an open-source Finance Tracker. The original structure loosely followed this style. Our team adopted this structure intentionally and refined it by reorganizing routes, views, and database logic to create a clearer separation of concerns consistent with MVC principles.
 
 ## Decisions
 

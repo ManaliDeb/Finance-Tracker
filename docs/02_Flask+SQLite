@@ -1,0 +1,2 @@
+## Overview
+We built the Finance Tracker on top of the **Flask web framework** with **SQLite** as the database, to keep the stack lightweight and easy to run for this class project.
