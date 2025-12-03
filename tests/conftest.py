@@ -1,16 +1,24 @@
 # tests/conftest.py
 import pytest
-from app.app import app as flask_app  # <-- uses app/app.py's "app" object
+from app.main import create_app
 
 
 @pytest.fixture
-def client():
+def app():
     """
-    Simple Flask test client for making requests to the app.
+    Create a fresh Flask app for each test run.
     """
-    # Put Flask into testing mode
-    flask_app.config["TESTING"] = True
+    app = create_app(
+        {
+            "TESTING": True,  # tells Flask we're in test mode
+        }
+    )
+    return app
 
-    # Create a test client and yield it to the tests
-    with flask_app.test_client() as client:
-        yield client
+
+@pytest.fixture
+def client(app):
+    """
+    Simple test client for making HTTP requests.
+    """
+    return app.test_client()
