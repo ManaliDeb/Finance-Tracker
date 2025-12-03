@@ -29,6 +29,10 @@ This Flask-based web application serves as a comprehensive finance tracker, enab
 ![Transaction_page](screenshots/transactions.png)
 #### Add Transaction Popup
 ![Add Transaction Popup](screenshots/add_transaction.png)
+#### Budgets_page
+![Budget_page](screenshots/budget.png)
+#### Add Budget Popup
+![Add Budget Popup](screenshots/add_budget.png)
 #### Statistics page
 ![Statistics page](screenshots/statistics.png)
 
