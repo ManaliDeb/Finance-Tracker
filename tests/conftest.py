@@ -5,20 +5,14 @@ from app.main import create_app
 
 @pytest.fixture
 def app():
-    """
-    Create a fresh Flask app for each test run.
-    """
-    app = create_app(
-        {
-            "TESTING": True,  # tells Flask we're in test mode
-        }
-    )
+    #Create a Flask app instance for testing using the refactored create_app.
+    app = create_app()           
+    app.config["TESTING"] = True # put Flask in testing mode
     return app
 
 
 @pytest.fixture
 def client(app):
-    """
-    Simple test client for making HTTP requests.
-    """
+    #Simple test client for making HTTP requests.
+    
     return app.test_client()
