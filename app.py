@@ -92,7 +92,7 @@ def login():
 
 @app.route('/logout')
 def logout():
-    session.pop('username', None)
+    session.clear()
     return redirect(url_for('login'))
 
 @app.route('/register', methods=['GET', 'POST'])
